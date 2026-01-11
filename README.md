@@ -27,7 +27,7 @@
 
 | Service Selection | Download Screen |
 |:---:|:---:|
-| <img src="docs/AnaEkran.png" width="400" alt="Service Selection"> | <img src="docs/İndirmeEkranı.jpg" width="400" alt="Download Screen"> |
+| <img src="docs/AnaEkran.png" width="400" alt="Service Selection"> | <img src="docs/İndirmeEkranı.png" width="400" alt="Download Screen"> |
 
 | Settings (General) | Settings (Advanced) |
 |:---:|:---:|
