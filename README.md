@@ -72,7 +72,7 @@ If you want to develop the project or run it from source code:
 
 ```bash
 # 1. Clone the Project
-git clone [https://github.com/idginity124/VidExtract.git](https://github.com/idginity124/VidExtract.git)
+git clone https://github.com/idginity124/VidExtract.git
 cd VidExtract
 
 # 2. Install Requirements
