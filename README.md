@@ -1,105 +1,130 @@
 <div align="center">
-  <img src="assets/app_icon.png" alt="Media Manager Pro Logo" width="120" height="120">
 
-# 📁 Media Manager Pro
-### The Ultimate File Organizer, Cleaner & Media Tool for Windows
+  <img src="assets/app_icon.ico" alt="VidExtract Logo" width="120" height="120">
+
+
+
+# 🎬 VidExtract
+
+### A Fast, Simple and Modern Video & Audio Downloader for Windows
+
+
 
   <p>
-    <img src="https://img.shields.io/badge/VERSION-v1.0-2ea44f?style=for-the-badge">
+
+    <img src="https://img.shields.io/github/v/release/idginity124/VidExtract?style=for-the-badge&color=2ea44f&label=LATEST%20VERSION">
+
     <img src="https://img.shields.io/badge/PYTHON-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white">
+
     <img src="https://img.shields.io/badge/PLATFORM-WINDOWS-0078D6?style=for-the-badge&logo=windows&logoColor=white">
+
     <img src="https://img.shields.io/badge/GUI-PySide6-41CD52?style=for-the-badge&logo=qt&logoColor=white">
-    <img src="https://img.shields.io/badge/LICENSE-MIT-yellow?style=for-the-badge">
+
+    <img src="https://img.shields.io/badge/LICENSE-GPLv3-yellow?style=for-the-badge">
+
   </p>
 
-  <p>
-    <strong>Media Manager Pro</strong> is a powerful desktop utility that helps you clean up chaotic folders: organize by date, find duplicates, convert image formats, scrub metadata, and repair old photos.
-    <br>
-    Built for normal humans who would rather not spend their weekend renaming files.
-  </p>
+
 
   <p>
-    <a href="#-download">📥 Download</a> •
-    <a href="#-features">✨ Features</a> •
+
+    <strong>VidExtract</strong> is a lightweight, user-friendly desktop application that lets you download videos and audio from popular platforms with just a link.<br>
+
+    No Python setup. No complicated configs. Just download and run.
+
+  </p>
+
+
+
+  <p>
+
+    <a href="#-download">📥 Download (EXE)</a> •
+
+    <a href="#-features">🌟 Features</a> •
+
     <a href="#-screenshots">📸 Screenshots</a> •
+
     <a href="#-developer-setup">🛠️ Developer Setup</a>
+
   </p>
+
 </div>
 
----
 
-## 🚀 Why Media Manager Pro?
-
-Because “I’ll sort my photos later” is a lie we all tell ourselves.
-
-- **Fast & Practical** (No wizardry, no 17-step configs)
-- **Modern Desktop UI** (Dark/Light themes)
-- **Safe File Handling** (Conflict modes: Copy/Overwrite/Skip)
-- **Extensible System** (Add your own Plugins)
 
 ---
 
-## ✨ Features
 
-- **🗂️ Smart Organization**
-  Sort mixed files into folders by **Day / Month / Year** automatically.
 
-- **🧹 Duplicate Cleaner (Optimized)**
-  Finds and separates identical files using size grouping + hash verification.
+## 🚀 Why VidExtract?
 
-- **🧩 Plugin System (New!)**
-  Extend functionality with custom Python scripts. Includes a **Plugin Manager**.
 
-- **🔧 Photo Repair (New!)**
-  Restore old or damaged photos using the **Telea Algorithm** (OpenCV).
 
-- **🖼️ Image Converter**
-  Convert between common formats (JPEG, PNG, WEBP, BMP, TIFF, HEIC).
+Most video downloaders are either outdated, bloated, or painful to set up.  
 
-- **🛡️ Privacy Mode**
-  Strip sensitive metadata (EXIF, GPS, Camera info) from your photos.
+VidExtract focuses on **speed**, **simplicity**, and a **clean desktop experience**.
 
-- **🌍 Multi-Language**
-  Fully localized interface (English + Turkish).
 
----
 
-## 📥 Download
+- Built for **end users**, not just developers  
 
-### Windows (Recommended)
+- One-click downloads  
 
-1. Go to **[Releases](../../releases)** page.
-2. Download the latest **MediaManagerPro_v1.0.zip**.
-3. Extract the ZIP file and run **MediaManagerPro.exe**.
+- Automatic dependency handling  
 
-> **Note:** Please keep the `plugins` and `assets` folders next to the exe file for everything to work correctly.
+- Modern UI with dark/light themes  
 
-> Windows SmartScreen may show a warning.
-> Click **More info → Run anyway**.
+
 
 ---
 
-## 📸 Screenshots
 
-| Dashboard | Plugin Manager |
-|:--:|:--:|
-| <img src="docs/dashboard.png" width="100%"> | <img src="docs/plugin_manager.png" width="100%"> |
+
+## 🌟 Features
+
+
+
+- **📺 Multi-Platform Support**  
+
+  YouTube, Reddit, Twitter (X), Facebook, Instagram, TikTok, SoundCloud and more.
+
+
+
+- **📋 Smart Clipboard Monitor**  
+
+  Copy a link and VidExtract detects it automatically.
+
+
+
+- **🎞️ High Quality Downloads**  
+
+  Supports 4K / 8K video and high-quality audio formats (MP3, M4A, FLAC).
+
+
+
+- **📂 Playlist Support**  
+
+  Download entire YouTube playlists with a single click.
+
+
+
+- **🌍 10+ Languages**  
+
+  English, Turkish, German, Spanish, French, Russian, Arabic, Chinese...
+
+
+
+- **⚙️ Automatic FFmpeg Setup**  
+
+  FFmpeg is downloaded and configured automatically.
+
+
+
+- **🎨 Modern Desktop UI**  
+
+  Built with PySide6. Supports Dark & Light themes.
+
+
 
 ---
 
-🧠 **The Training Arc**
-
-This project is part of my ongoing training arc.
-Built with discipline, refined through mistakes.
-
----
-
-## 🛠️ Developer Setup
-
-```bash
-git clone <your-repo-url>
-cd MediaManagerPro
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements-full.txt
-python main.py
