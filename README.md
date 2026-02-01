@@ -11,13 +11,15 @@ Any previous open-source license (MIT, GPL, etc.) is no longer applicable
 to new versions of this repository.
 
 Unauthorized use, redistribution, or republication is prohibited.
+This repository may contain legacy references to open-source licenses.
+Those references apply only to deprecated versions and are no longer valid.
 
   <p>
     <img src="https://img.shields.io/github/v/release/idginity124/VidExtract?style=for-the-badge&color=2ea44f&label=LATEST%20VERSION">
     <img src="https://img.shields.io/badge/PYTHON-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white">
     <img src="https://img.shields.io/badge/PLATFORM-WINDOWS-0078D6?style=for-the-badge&logo=windows&logoColor=white">
     <img src="https://img.shields.io/badge/GUI-PySide6-41CD52?style=for-the-badge&logo=qt&logoColor=white">
-    <img src="https://img.shields.io/badge/LICENSE-GPLv3-yellow?style=for-the-badge">
+    <img src="https://img.shields.io/badge/LICENSE-PROPRIETARY-red?style=for-the-badge">
   </p>
 
   <p>
@@ -101,8 +103,6 @@ Built with discipline, refined through mistakes.
 
 ## 🛠️ Developer Setup
 
-```bash
-git clone [https://github.com/idginity124/VidExtract.git](https://github.com/idginity124/VidExtract.git)
-cd VidExtract
-pip install -r requirements.txt
-python vidextract.py
+Source code is private and not included in this repository.
+This section is kept for internal reference only.
+
