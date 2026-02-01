@@ -3,6 +3,14 @@
 
 # 🎬 VidExtract
 ### A Fast, Simple and Modern Video & Audio Downloader for Windows
+## ⚠️ License Notice
+
+This project is **NOT open-source**.
+
+Any previous open-source license (MIT, GPL, etc.) is no longer applicable
+to new versions of this repository.
+
+Unauthorized use, redistribution, or republication is prohibited.
 
   <p>
     <img src="https://img.shields.io/github/v/release/idginity124/VidExtract?style=for-the-badge&color=2ea44f&label=LATEST%20VERSION">
