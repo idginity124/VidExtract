@@ -55,4 +55,4 @@ cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
 
 Linux package playback is tested under real WebKitGTK after packaging: `xvfb-run -a npm run test:playback`. CI also needs PulseAudio, xvfb and xauth for this check. The browser UI test uses controlled IPC; the Rust/media/playback checks cover real native components.
 
-Keep version numbers in package.json, package-lock.json, Cargo.toml, Cargo.lock and tauri.conf.json synchronized. A release tag such as `v2.3.0` runs both platform builds and publishes their artifacts only if both succeed.
+Keep version numbers in package.json, package-lock.json, Cargo.toml, Cargo.lock and tauri.conf.json synchronized. Builds and release uploads are performed locally. The GitHub Actions workflow is available only on manual request and does not auto-publish tags.

@@ -4,7 +4,6 @@
   <p><strong>Download a video. Find the sentence. Jump to the moment.</strong></p>
   <p>Windows · Linux · Local transcription · Online & offline translation</p>
   <p>
-    <a href="https://github.com/idginity124/VidExtract/actions/workflows/desktop.yml"><img alt="Desktop builds" src="https://github.com/idginity124/VidExtract/actions/workflows/desktop.yml/badge.svg"></a>
     <a href="LICENSE"><img alt="GPLv3" src="https://img.shields.io/badge/license-GPLv3-blue"></a>
     <a href="https://github.com/idginity124/VidExtract/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/idginity124/VidExtract/total"></a>
   </p>
@@ -77,7 +76,7 @@ cargo test --manifest-path src-tauri/Cargo.toml --locked
 cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
 ```
 
-[GitHub Actions](.github/workflows/desktop.yml) builds Windows and Linux independently, exercises the UI/media code and prepares installers plus a Store MSIX. Tagged releases publish only after both platform jobs pass.
+Release packages are prepared locally. The optional [GitHub Actions workflow](.github/workflows/desktop.yml) is manual-only; pushing source code does not start another remote build.
 
 ## Microsoft Store and privacy
 

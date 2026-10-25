@@ -57,3 +57,6 @@ test-results/
 *.msixbundle
 store-output/
 release-assets/
+
+# Local Windows cross-build resources
+packaging/windows/binaries/

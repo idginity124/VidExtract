@@ -14,7 +14,7 @@ const windows = process.platform === "win32";
 const suffix = windows ? ".exe" : "";
 const whisperRevision = "d1be6fde11ac6e0407606b4e42fe72d34add8037"; // whisper.cpp v1.9.5
 if (!["win32", "linux"].includes(process.platform) || process.arch !== "x64") throw new Error("Bu paketleme betiği Windows/Linux x64 içindir.");
-const scratch = await mkdtemp(join(tmpdir(), "vidextract-translation-"));
+const scratch = await mkdtemp(join(windows?(process.env.RUNNER_TEMP||tmpdir()):tmpdir(), "ve-t-"));
 await mkdir(destination, { recursive: true });
 const headers = { "User-Agent": "VidExtract-build" };
 if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
@@ -71,15 +71,15 @@ async function install(source, name) {
   if (!windows) await chmod(target, 0o755);
 }
 try {
-  const ct=join(scratch,"ctranslate2"),sp=join(scratch,"sentencepiece");
+  const ct=join(scratch,"c"),sp=join(scratch,"s");
   run("git",["clone","--depth","1","--branch","v4.8.3","https://github.com/OpenNMT/CTranslate2.git",ct]);
   run("git",["submodule","update","--init","--depth","1","third_party/cpu_features","third_party/spdlog"],ct);
   run("git",["submodule","update","--init","--recursive","--depth","1","third_party/ruy"],ct);
   run("git",["clone","--depth","1","--branch","v0.2.1","https://github.com/google/sentencepiece.git",sp]);
   const include=join(scratch,"include");await mkdir(join(include,"nlohmann"),{recursive:true});
   await download("https://raw.githubusercontent.com/nlohmann/json/v3.12.0/single_include/nlohmann/json.hpp",join(include,"nlohmann/json.hpp"));
-  const build=join(scratch,"build");
-  run("cmake",["-S",join(root,"src-tauri/native"),"-B",build,"-DCMAKE_BUILD_TYPE=Release","-DCMAKE_POLICY_VERSION_MINIMUM=3.5",`-DCT2_ROOT=${ct}`,`-DSPM_ROOT=${sp}`,`-DJSON_ROOT=${include}`,...(windows?["-A","x64","-DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded"]:[])]);
+  const build=join(scratch,"b");
+  run("cmake",["-S",join(root,"src-tauri/native"),"-B",build,"-DCMAKE_BUILD_TYPE=Release","-DCMAKE_POLICY_VERSION_MINIMUM=3.5",`-DCT2_ROOT=${ct}`,`-DSPM_ROOT=${sp}`,`-DJSON_ROOT=${include}`,...(windows?["-G","Ninja","-DCMAKE_C_COMPILER=cl","-DCMAKE_CXX_COMPILER=cl","-DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded"]:[])]);
   run("cmake",["--build",build,"--config","Release","--target","translate-cpu","--parallel","4"]);
   await install(await findFile(build,`translate-cpu${suffix}`),`translate-cpu${suffix}`);
   for(const [source,name] of [[join(ct,"LICENSE"),"CTranslate2-LICENSE"],[join(sp,"LICENSE"),"SentencePiece-LICENSE"],[join(ct,"third_party/ruy/LICENSE"),"Ruy-LICENSE"],[join(ct,"third_party/cpu_features/LICENSE"),"cpu-features-LICENSE"],[join(ct,"third_party/spdlog/LICENSE"),"spdlog-LICENSE"],[join(ct,"third_party/ruy/third_party/cpuinfo/LICENSE"),"cpuinfo-LICENSE"]])await install(source,name);

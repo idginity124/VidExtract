@@ -15,8 +15,8 @@ The workflow builds the native Windows application, copies the required resource
 
 ## Upload
 
-1. Wait for the **Windows** GitHub Actions build to pass.
-2. Download its artifact and find `VidExtract_2.3.0_x64-store.msix`.
+1. Build and validate the local Windows package.
+2. Find `VidExtract_2.3.0_x64-store.msix` in the exported release directory.
 3. In Partner Center → VidExtract → Submission → Packages, upload that MSIX. Do not upload the Linux package or NSIS installer to the MSIX product.
 4. Complete descriptions, screenshots, privacy URL, age questionnaire and restricted-capability explanation.
 5. Submit only after reviewing the certification preview. Building a package does not itself submit or publish the application.
