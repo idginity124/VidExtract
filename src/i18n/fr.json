@@ -194,5 +194,7 @@
   "errorTranslationQuota": "Limite gratuite atteinte. Réessayez plus tard ou traduisez hors ligne.",
   "errorTranslationTooLong": "Ce texte dépasse la limite quotidienne. Ajoutez une adresse e-mail ou traduisez hors ligne.",
   "errorTranslationEmail": "Saisissez une adresse valide ou laissez le champ vide.",
-  "errorTranslationResponse": "Le service n’a pas pu traduire ce texte. Réessayez ou traduisez hors ligne."
+  "errorTranslationResponse": "Le service n’a pas pu traduire ce texte. Réessayez ou traduisez hors ligne.",
+  "privacyPolicy": "Politique de confidentialité",
+  "helpSupport": "Aide et signalement"
 }

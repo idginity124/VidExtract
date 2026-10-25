@@ -194,5 +194,7 @@
   "errorTranslationQuota": "Se alcanzó el límite gratuito. Inténtalo más tarde o elige sin conexión.",
   "errorTranslationTooLong": "El texto supera el límite diario. Añade un correo para aumentarlo o traduce sin conexión.",
   "errorTranslationEmail": "Introduce un correo válido o deja el campo vacío.",
-  "errorTranslationResponse": "El servicio no pudo traducir este texto. Reintenta o traduce sin conexión."
+  "errorTranslationResponse": "El servicio no pudo traducir este texto. Reintenta o traduce sin conexión.",
+  "privacyPolicy": "Política de privacidad",
+  "helpSupport": "Ayuda e informar de problemas"
 }

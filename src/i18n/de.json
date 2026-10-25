@@ -194,5 +194,7 @@
   "errorTranslationQuota": "Kostenloses Limit erreicht. Versuchen Sie es später oder übersetzen Sie offline.",
   "errorTranslationTooLong": "Dieser Text überschreitet das Tageslimit. Fügen Sie eine E-Mail hinzu oder übersetzen Sie offline.",
   "errorTranslationEmail": "Geben Sie eine gültige E-Mail ein oder lassen Sie das Feld leer.",
-  "errorTranslationResponse": "Der Dienst konnte diesen Text nicht übersetzen. Versuchen Sie es erneut oder offline."
+  "errorTranslationResponse": "Der Dienst konnte diesen Text nicht übersetzen. Versuchen Sie es erneut oder offline.",
+  "privacyPolicy": "Datenschutz",
+  "helpSupport": "Hilfe und Problemmeldungen"
 }

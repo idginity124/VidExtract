@@ -194,5 +194,7 @@
   "errorTranslationQuota": "Ücretsiz çeviri sınırına ulaşıldı. Daha sonra dene veya çevrimdışı çeviriyi seç.",
   "errorTranslationTooLong": "Bu metin ücretsiz günlük sınırı aşıyor. E-posta ekleyerek sınırı artırabilir veya çevrimdışı çevirebilirsin.",
   "errorTranslationEmail": "Geçerli bir e-posta adresi gir veya alanı boş bırak.",
-  "errorTranslationResponse": "Çeviri servisi bu metni çeviremedi. Yeniden dene veya çevrimdışı çeviriyi seç."
+  "errorTranslationResponse": "Çeviri servisi bu metni çeviremedi. Yeniden dene veya çevrimdışı çeviriyi seç.",
+  "privacyPolicy": "Gizlilik politikası",
+  "helpSupport": "Yardım ve sorun bildirimi"
 }

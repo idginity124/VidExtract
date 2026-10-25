@@ -194,5 +194,7 @@
   "errorTranslationQuota": "The free translation limit has been reached. Try later or choose offline translation.",
   "errorTranslationTooLong": "This text exceeds the free daily limit. Add an email to increase it or translate offline.",
   "errorTranslationEmail": "Enter a valid email address or leave the field empty.",
-  "errorTranslationResponse": "The service could not translate this text. Try again or choose offline translation."
+  "errorTranslationResponse": "The service could not translate this text. Try again or choose offline translation.",
+  "privacyPolicy": "Privacy policy",
+  "helpSupport": "Help and issue reports"
 }

@@ -194,5 +194,7 @@
   "errorTranslationQuota": "O limite gratuito foi atingido. Tente mais tarde ou traduza off-line.",
   "errorTranslationTooLong": "O texto excede o limite diário. Adicione um e-mail ou traduza off-line.",
   "errorTranslationEmail": "Digite um e-mail válido ou deixe em branco.",
-  "errorTranslationResponse": "O serviço não traduziu este texto. Tente novamente ou use off-line."
+  "errorTranslationResponse": "O serviço não traduziu este texto. Tente novamente ou use off-line.",
+  "privacyPolicy": "Política de privacidade",
+  "helpSupport": "Ajuda e relato de problemas"
 }

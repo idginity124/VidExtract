@@ -480,6 +480,19 @@ pub fn cancel_download(state: State<'_, AppState>, job_id: String) -> Result<(),
     Ok(())
 }
 #[tauri::command]
+async fn open_project_page(page:String)->Result<(),String>{
+    let url=match page.as_str(){"privacy"=>"https://github.com/idginity124/VidExtract/blob/main/PRIVACY.md","support"=>"https://github.com/idginity124/VidExtract/issues",_=>return Err("Geçersiz sayfa".into())};
+    #[cfg(windows)]
+    let mut command=process::command(std::path::Path::new("rundll32.exe"));
+    #[cfg(windows)]
+    command.arg("url.dll,FileProtocolHandler");
+    #[cfg(not(windows))]
+    let mut command=process::command(std::path::Path::new("xdg-open"));
+    command.arg(url);
+    process::checked(command,15).await.map(|_|())
+}
+
+#[tauri::command]
 async fn reveal_in_file_manager(path: String) -> Result<(), String> {
     let canonical = dunce::canonicalize(path).map_err(|_| "Klasör bulunamadı")?;
     let folder = if canonical.is_dir() {
@@ -507,6 +520,7 @@ pub fn desktop_builder() -> tauri::Builder<tauri::Wry> {
             start_download,
             cancel_download,
             reveal_in_file_manager,
+            open_project_page,
             studio::prepare_media,
             studio::install_model,
             studio::transcribe_media,

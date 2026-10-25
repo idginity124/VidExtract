@@ -1,0 +1,28 @@
+name: Bug report
+description: Report a reproducible VidExtract problem.
+body:
+  - type: input
+    id: version
+    attributes:
+      label: VidExtract version
+      placeholder: 2.3.0
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: Operating system and package
+      placeholder: Windows 11 x64 / NSIS or MSIX; Ubuntu 22.04 / AppImage
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps and expected behavior
+      description: Include the exact action that fails. Do not post private media, transcripts or credentials.
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Error message or non-private screenshot

@@ -194,5 +194,7 @@
   "errorTranslationQuota": "免费额度已用完，请稍后重试或使用离线翻译。",
   "errorTranslationTooLong": "文本超出每日额度，请添加邮箱提高额度或使用离线翻译。",
   "errorTranslationEmail": "请输入有效邮箱或留空。",
-  "errorTranslationResponse": "服务未能翻译此文本，请重试或使用离线翻译。"
+  "errorTranslationResponse": "服务未能翻译此文本，请重试或使用离线翻译。",
+  "privacyPolicy": "隐私政策",
+  "helpSupport": "帮助与问题反馈"
 }

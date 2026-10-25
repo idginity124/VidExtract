@@ -8,7 +8,7 @@
     <a href="LICENSE"><img alt="GPLv3" src="https://img.shields.io/badge/license-GPLv3-blue"></a>
     <a href="https://github.com/idginity124/VidExtract/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/idginity124/VidExtract/total"></a>
   </p>
-  <p><a href="https://github.com/idginity124/VidExtract/releases">Download</a> · <a href="docs/README.tr.md">Türkçe</a> · <a href="PRIVACY.md">Privacy</a> · <a href="CONTRIBUTING.md">Contribute</a></p>
+  <p><a href="https://buymeacoffee.com/ekrembulgan">☕ Sponsor this project</a> · <a href="https://github.com/idginity124/VidExtract/releases">Download</a> · <a href="docs/README.tr.md">Türkçe</a> · <a href="PRIVACY.md">Privacy</a> · <a href="CONTRIBUTING.md">Contribute</a></p>
 </div>
 
 VidExtract brings media downloading, local speech recognition, timestamp search, translation and video clips into one desktop app. Built with **Tauri 2, React and Rust**. The 2.x desktop source is now available under GPLv3; the former Python interface is retired.

@@ -19,7 +19,7 @@ permissions:
   contents: read
 concurrency:
   group: desktop-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   desktop:
     name: ${{ matrix.os }}
@@ -48,11 +48,26 @@ jobs:
           # Ubuntu runner LLVM headers conflict with GStreamer's libunwind-dev dependency.
           sudo apt-get remove -y 'libunwind-*-dev'
           sudo apt-get install -y libunwind-dev libwebkit2gtk-4.1-dev build-essential libssl-dev librsvg2-dev patchelf libayatana-appindicator3-dev libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-pulseaudio xvfb xauth pulseaudio
-      - name: Vulkan build SDK
+      - name: Linux Vulkan build SDK
+        if: runner.os == 'Linux'
         uses: humbletim/install-vulkan-sdk@v1.2
         with:
           version: 1.4.341.1
           cache: true
+      - name: Windows Vulkan SDK
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $sdk = Join-Path $env:RUNNER_TEMP 'VulkanSDK'
+          $installer = Join-Path $env:RUNNER_TEMP 'VulkanSDK-Installer.exe'
+          Invoke-WebRequest 'https://sdk.lunarg.com/sdk/download/1.4.341.1/windows/vulkansdk-windows-X64-1.4.341.1.exe' -OutFile $installer
+          $process = Start-Process -FilePath $installer -ArgumentList @('--root', $sdk, '--accept-licenses', '--default-answer', '--confirm-command', 'install', 'copy_only=1') -Wait -PassThru
+          if ($process.ExitCode -ne 0) { throw 'Vulkan SDK installation failed.' }
+          foreach ($file in @('Include/vulkan/vulkan.h', 'Lib/vulkan-1.lib', 'Bin/glslc.exe')) {
+            if (-not (Test-Path (Join-Path $sdk $file))) { throw "Missing SDK component: $file" }
+          }
+          "VULKAN_SDK=$sdk" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          (Join-Path $sdk 'Bin') | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
       - run: npm ci
       - run: npm test
       - name: Browser interactions
@@ -63,7 +78,7 @@ jobs:
           node scripts/test-stability.mjs
       - name: Native tools cache
         id: native-cache
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: src-tauri/binaries
           key: native-${{ runner.os }}-${{ hashFiles('scripts/setup-tools.mjs', 'scripts/setup-translation.mjs', 'src-tauri/native/**') }}
@@ -73,6 +88,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm run setup:translation
         if: steps.native-cache.outputs.cache-hit != 'true'
+      - name: Save native tools
+        if: steps.native-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: src-tauri/binaries
+          key: native-${{ runner.os }}-${{ hashFiles('scripts/setup-tools.mjs', 'scripts/setup-translation.mjs', 'src-tauri/native/**') }}
       - run: npm run test:media
       - run: cargo test --manifest-path src-tauri/Cargo.toml --locked
       - run: cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets --locked -- -D warnings
@@ -118,4 +139,10 @@ jobs:
       - name: Publish tested packages
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" release-assets/* --verify-tag --title "VidExtract $GITHUB_REF_NAME" --notes-file docs/RELEASE-2.3.0.md
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" release-assets/* --clobber
+            gh release edit "$GITHUB_REF_NAME" --draft=false --latest --title "VidExtract $GITHUB_REF_NAME" --notes-file docs/RELEASE-2.3.0.md
+          else
+            gh release create "$GITHUB_REF_NAME" release-assets/* --verify-tag --title "VidExtract $GITHUB_REF_NAME" --notes-file docs/RELEASE-2.3.0.md
+          fi
