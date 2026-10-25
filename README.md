@@ -87,3 +87,9 @@ Read [PRIVACY.md](PRIVACY.md) for clipboard behavior, local files, device detect
 ## Open source
 
 Copyright © 2026 Ekrem Bulgan. VidExtract's original code is **GPL-3.0-only**. Third-party software and models retain their licenses; see [THIRD_PARTY.md](THIRD_PARTY.md). Contributions and reproducible bug reports are welcome through [GitHub Issues](https://github.com/idginity124/VidExtract/issues).
+
+<hr />
+
+<p align="center">
+  <img src="assets/training-arc.svg" width="840" alt="The Training Arc. Her proje bir seviye, her hata bir antrenman. Bu proje, sürekli öğrenip geliştiğim kişisel yolculuğumun bir parçası. Ekrem Bulgan." />
+</p>

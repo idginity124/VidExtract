@@ -16,3 +16,9 @@ Konuşma dili otomatik algılanabilir. Tiny/Base/Small modelleri cihazda çalı�
 Türkçe, İngilizce, İspanyolca, Fransızca, Almanca, Portekizce, Rusça, Arapça, Hintçe ve Çince arayüzü vardır. Orijinal ve çeviri yan yana görünür; TXT/SRT/VTT kaydedilebilir. Otomatik sonuçları kontrol etmek gerekir.
 
 Eski Python arayüzü kaldırılmıştır. Yeni masaüstü kaynakları GPLv3 ile paylaşılır. Üçüncü taraf araçların ve modellerin lisansları [ayrıca belirtilir](../THIRD_PARTY.md).
+
+<hr />
+
+<p align="center">
+  <img src="../assets/training-arc.svg" width="840" alt="The Training Arc. Her proje bir seviye, her hata bir antrenman. Bu proje, sürekli öğrenip geliştiğim kişisel yolculuğumun bir parçası. Ekrem Bulgan." />
+</p>
