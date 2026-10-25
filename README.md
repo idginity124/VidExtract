@@ -1,95 +1,65 @@
-<div align="center">
-  <img src="assets/brand-mark.png" width="100" alt="VidExtract logo">
-  <h1>VidExtract</h1>
-  <p><strong>Download a video. Find the sentence. Jump to the moment.</strong></p>
-  <p>Windows · Linux · Local transcription · Online & offline translation</p>
-  <p>
-    <a href="LICENSE"><img alt="GPLv3" src="https://img.shields.io/badge/license-GPLv3-blue"></a>
-    <a href="https://github.com/idginity124/VidExtract/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/idginity124/VidExtract/total"></a>
-  </p>
-  <p><a href="https://buymeacoffee.com/ekrembulgan">☕ Sponsor this project</a> · <a href="https://github.com/idginity124/VidExtract/releases">Download</a> · <a href="docs/README.tr.md">Türkçe</a> · <a href="PRIVACY.md">Privacy</a> · <a href="CONTRIBUTING.md">Contribute</a></p>
-</div>
+<p align="center"><a href="README.md">English</a> &nbsp; / &nbsp; <a href="docs/README.tr.md">Türkçe</a></p>
+<p align="center"><img src="assets/readme-hero.en.svg" width="840" alt="VidExtract"></p>
+<p align="center"><a href="https://github.com/idginity124/VidExtract/releases">Download</a> &nbsp; / &nbsp; <a href="BUILDING.md">Build guide</a> &nbsp; / &nbsp; <a href="PRIVACY.md">Privacy</a> &nbsp; / &nbsp; <a href="https://buymeacoffee.com/ekrembulgan">Support</a></p>
 
-VidExtract brings media downloading, local speech recognition, timestamp search, translation and video clips into one desktop app. Built with **Tauri 2, React and Rust**. The 2.x desktop source is now available under GPLv3; the former Python interface is retired.
+<br>
+<p align="center">A desktop workspace for downloading media, transcribing speech locally and finding the exact moment you need.<br>Translate beside the original, export subtitles or save a video clip.</p>
+<p align="center"><sub>Tauri 2 · React · Rust · whisper.cpp · CTranslate2 · GPLv3</sub></p>
+<p align="center"><a href="docs/screenshots/studio-dark.png"><img src="docs/screenshots/studio-dark.png" width="840" alt="VidExtract Studio — transcript search and translation"></a></p>
+<details>
+<summary>Light theme preview</summary>
 
-![VidExtract Studio](docs/screenshots/studio-dark.png)
+<p align="center"><a href="docs/screenshots/studio-light.png"><img src="docs/screenshots/studio-light.png" width="840" alt="VidExtract — light theme"></a></p>
 
-## Download
+</details>
 
-Get packages from [GitHub Releases](https://github.com/idginity124/VidExtract/releases). Verify the platform's `SHA256SUMS` file if needed.
+<h2 align="center">From a video to a useful transcript</h2>
+<table align="center"><tr><th align="center">Download</th><th align="center">Find</th><th align="center">Keep</th></tr><tr><td align="center">Video, audio, playlists and a download queue.</td><td align="center">Automatic language detection and timestamp search.</td><td align="center">Side-by-side translation, TXT/SRT/VTT and MP4 clips.</td></tr></table>
+<p align="center">Ten interface languages, including Arabic RTL, with light and dark themes.</p>
+<h2 align="center">Download</h2>
 
-| Platform | Package | Notes |
+| Platform | Package | Before you start |
 |---|---|---|
-| Windows x64 | `.exe` installer | Windows 10/11 with Microsoft Edge WebView2; the installer can set up the runtime |
-| Linux x64 | `.AppImage` | Portable package; make executable before launching |
-| Debian / Ubuntu x64 | `.deb` | Install with `sudo apt install ./VidExtract_*.deb` |
-| Microsoft Store | `.msix` submission package | Store publication is being prepared; the submission package is not a signed sideload installer |
+| Windows x64 | [EXE](https://github.com/idginity124/VidExtract/releases) | Windows 10/11; WebView2 runtime required |
+| Linux x64 | [AppImage](https://github.com/idginity124/VidExtract/releases) | Make executable before launching |
+| Debian / Ubuntu x64 | [DEB](https://github.com/idginity124/VidExtract/releases) | `sudo apt install ./VidExtract_*.deb` |
 
-Windows direct-download installers are not currently Authenticode signed. Microsoft Store signs accepted MSIX packages during publication. Linux release builds run on Ubuntu 22.04 to avoid building against a newer workstation's glibc. Other distributions and all GPUs are not universally certified.
+<p align="center">Microsoft Store publication is being prepared. The unsigned <code>-store.msix</code> is for Partner Center submission, not ordinary installation.</p>
+<details>
+<summary>Installation and validation notes</summary>
 
 ```bash
 chmod +x VidExtract_*.AppImage
 ./VidExtract_*.AppImage
 ```
 
-## What you can do
+Windows EXE installers are currently unsigned. Packages are built locally. Windows workers were tested through Wine; native Windows GUI testing and Store certification remain pending. Distribution and GPU compatibility varies. [Validation scope](docs/VALIDATION.md).
 
-- Download video or audio, choose format/quality, process playlists and manage a queue.
-- Open an existing media file and transcribe locally with multilingual Tiny, Base or Small models.
-- Detect the spoken language automatically and display its full name.
-- Search transcripts and click a timestamp to play that moment.
-- Translate beside the original text, then export TXT, SRT or VTT.
-- Save a selected time range as an MP4 clip.
-- Choose dark/light appearance and one of ten interface languages, including right-to-left Arabic.
+Verify the attached platform SHA-256 manifest if needed.
 
-**Languages:** Turkish, English, Spanish, French, German, Portuguese, Russian, Arabic, Hindi and Chinese. Interface, source speech language and translation target are independent.
+</details>
 
-## Local speech recognition and GPU
+<h2 align="center">Choose how to process your media</h2>
+<table align="center"><tr><th align="center">Local transcription</th><th align="center">Online translation</th><th align="center">Offline translation</th></tr><tr><td align="center">Speech recognition runs on your device. Optional Vulkan acceleration with CPU fallback.</td><td align="center">MyMemory needs no account or API key. Selected text is sent to the provider.</td><td align="center">Download only the required language packs. Translation text stays on your device.</td></tr></table>
+<details>
+<summary>Models, language packs and limits</summary>
 
-Speech recognition runs through whisper.cpp on your computer. Models are downloaded once when requested: Tiny ~78 MB, Base ~148 MB, Small ~488 MB. CPU/RAM measurements guide the recommendation and thread count. Compatible devices can use **Vulkan GPU acceleration**; CPU mode remains available, and GPU failures retry on CPU. Portable CPU and AVX2 workers are selected according to actual CPU instruction support.
+Speech models download on request: Tiny ~78 MB, Base ~148 MB, Small ~488 MB. CPU/RAM measurements guide model and thread recommendations. Long recordings are processed in bounded sections.
 
-Long recordings are processed in bounded audio sections. Automatic transcription and translation can contain mistakes; review important exports.
+Offline translation packs are approximately 65–286 MB each. Some pairs need two packs through English; the missing download size is shown before installation. Completed translation segments are cached locally.
 
-## Two translation choices
+MyMemory’s published allowance is 5,000 characters/day anonymously, or 50,000 with a valid optional email. [Provider limits](https://mymemory.translated.net/doc/usagelimits.php) may change.
 
-**Online:** MyMemory requires no account, API key or model download. Its published anonymous allowance is 5,000 characters/day; a valid optional email can raise that to 50,000. Only the text is sent, with normal network metadata and the email if supplied. [Provider limits](https://mymemory.translated.net/doc/usagelimits.php) may change. Completed segments are cached locally to avoid repeat requests.
+Languages: Turkish, English, Spanish, French, German, Portuguese, Russian, Arabic, Hindi and Chinese. Interface, speech and translation choices are independent.
 
-**Offline:** download only the required language-direction packs. Each is approximately **65–286 MB**; some pairs require two packs through English. The exact missing download size is shown before installation. A small CTranslate2 CPU worker processes bounded batches; no translation text leaves the computer. Language/model quality varies.
+</details>
 
-## Build from source
+<p align="center">Automatic transcripts and translations can contain errors. Download only media you are authorized to access and save.</p>
+<h2 align="center">Build and contribute</h2>
+<p align="center">The desktop source is open under GPLv3. Start with the build guide for dependencies and platform-specific setup.</p>
+<p align="center"><a href="BUILDING.md">BUILDING</a> &nbsp; / &nbsp; <a href="CONTRIBUTING.md">CONTRIBUTING</a> &nbsp; / &nbsp; <a href="https://github.com/idginity124/VidExtract/issues">Issues</a> &nbsp; / &nbsp; <a href="LICENSE">GPLv3</a> &nbsp; / &nbsp; <a href="THIRD_PARTY.md">Third-party licenses</a></p>
 
-See [BUILDING.md](BUILDING.md) for dependencies, Vulkan SDK and platform commands. Initial preparation needs internet, Node.js 22+, stable Rust, Git, CMake and a C++ compiler.
-
-```bash
-npm ci
-npm run setup:tools
-npm run setup:translation
-npm run licenses
-npm run tauri dev
-```
-
-```bash
-npm test
-npm run build
-npm run test:ui                 # first: npx playwright install chromium
-cargo test --manifest-path src-tauri/Cargo.toml --locked
-cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
-```
-
-Release packages are prepared locally. The optional [GitHub Actions workflow](.github/workflows/desktop.yml) is manual-only; pushing source code does not start another remote build.
-
-## Microsoft Store and privacy
-
-Store ID: `9P5V676WV12Z`. Publication is in progress; reserving a name is not the same as having a live listing. See [the Store packaging guide](docs/MICROSOFT-STORE.md) and [listing copy](docs/STORE-LISTING.md).
-
-Read [PRIVACY.md](PRIVACY.md) for clipboard behavior, local files, device detection and external services. Download only media you are authorized to access; site availability and permitted use remain subject to the source service and applicable rights.
-
-## Open source
-
-Copyright © 2026 Ekrem Bulgan. VidExtract's original code is **GPL-3.0-only**. Third-party software and models retain their licenses; see [THIRD_PARTY.md](THIRD_PARTY.md). Contributions and reproducible bug reports are welcome through [GitHub Issues](https://github.com/idginity124/VidExtract/issues).
-
-<hr />
-
-<p align="center">
-  <img src="assets/training-arc.svg" width="840" alt="The Training Arc. Her proje bir seviye, her hata bir antrenman. Bu proje, sürekli öğrenip geliştiğim kişisel yolculuğumun bir parçası. Ekrem Bulgan." />
-</p>
+<br>
+<p align="center"><img src="assets/training-arc.en.svg" width="840" alt="The Training Arc — Ekrem Bulgan"></p>
+<p align="center"><a href="https://www.ekrembulgan.com">Ekrem Bulgan</a> &nbsp; / &nbsp; <a href="https://linkedin.com/in/ekrembulgan">LinkedIn</a></p>
+<p align="center"><sub>© 2026 Ekrem Bulgan · GPL-3.0-only</sub></p>
