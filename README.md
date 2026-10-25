@@ -1,108 +1,90 @@
 <div align="center">
-  <img src="assets/app_icon.ico" alt="VidExtract Logo" width="120" height="120">
-
-# 🎬 VidExtract
-### A Fast, Simple and Modern Video & Audio Downloader for Windows
-## ⚠️ License Notice
-
-This project is **NOT open-source**.
-
-Any previous open-source license (MIT, GPL, etc.) is no longer applicable
-to new versions of this repository.
-
-Unauthorized use, redistribution, or republication is prohibited.
-This repository may contain legacy references to open-source licenses.
-Those references apply only to deprecated versions and are no longer valid.
-
+  <img src="assets/brand-mark.png" width="100" alt="VidExtract logo">
+  <h1>VidExtract</h1>
+  <p><strong>Download a video. Find the sentence. Jump to the moment.</strong></p>
+  <p>Windows · Linux · Local transcription · Online & offline translation</p>
   <p>
-    <img src="https://img.shields.io/github/v/release/idginity124/VidExtract?style=for-the-badge&color=2ea44f&label=LATEST%20VERSION">
-    <img src="https://img.shields.io/badge/PYTHON-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white">
-    <img src="https://img.shields.io/badge/PLATFORM-WINDOWS-0078D6?style=for-the-badge&logo=windows&logoColor=white">
-    <img src="https://img.shields.io/badge/GUI-PySide6-41CD52?style=for-the-badge&logo=qt&logoColor=white">
-    <img src="https://img.shields.io/badge/LICENSE-PROPRIETARY-red?style=for-the-badge">
+    <a href="https://github.com/idginity124/VidExtract/actions/workflows/desktop.yml"><img alt="Desktop builds" src="https://github.com/idginity124/VidExtract/actions/workflows/desktop.yml/badge.svg"></a>
+    <a href="LICENSE"><img alt="GPLv3" src="https://img.shields.io/badge/license-GPLv3-blue"></a>
+    <a href="https://github.com/idginity124/VidExtract/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/idginity124/VidExtract/total"></a>
   </p>
-
-  <p>
-    <strong>VidExtract</strong> is a lightweight, user-friendly desktop application that lets you download videos and audio from popular platforms with just a link.<br>
-    No Python setup. No complicated configs. Just download and run.
-  </p>
-
-  <p>
-    <a href="#-download">📥 Download (EXE)</a> •
-    <a href="#-features">🌟 Features</a> •
-    <a href="#-screenshots">📸 Screenshots</a> •
-    <a href="#-developer-setup">🛠️ Developer Setup</a>
-  </p>
+  <p><a href="https://github.com/idginity124/VidExtract/releases">Download</a> · <a href="docs/README.tr.md">Türkçe</a> · <a href="PRIVACY.md">Privacy</a> · <a href="CONTRIBUTING.md">Contribute</a></p>
 </div>
 
----
+VidExtract brings media downloading, local speech recognition, timestamp search, translation and video clips into one desktop app. Built with **Tauri 2, React and Rust**. The 2.x desktop source is now available under GPLv3; the former Python interface is retired.
 
-## 🚀 Why VidExtract?
+![VidExtract Studio](docs/screenshots/studio-dark.png)
 
-Most video downloaders are either outdated, bloated, or painful to set up.  
-VidExtract focuses on **speed**, **simplicity**, and a **clean desktop experience**.
+## Download
 
-- Built for **end users**, not just developers  
-- One-click downloads  
-- Automatic dependency handling  
-- Modern UI with dark/light themes  
+Get packages from [GitHub Releases](https://github.com/idginity124/VidExtract/releases). Verify the platform's `SHA256SUMS` file if needed.
 
----
+| Platform | Package | Notes |
+|---|---|---|
+| Windows x64 | `.exe` installer | Windows 10/11 with Microsoft Edge WebView2; the installer can set up the runtime |
+| Linux x64 | `.AppImage` | Portable package; make executable before launching |
+| Debian / Ubuntu x64 | `.deb` | Install with `sudo apt install ./VidExtract_*.deb` |
+| Microsoft Store | `.msix` submission package | Store publication is being prepared; the submission package is not a signed sideload installer |
 
-## 🌟 Features
+Windows direct-download installers are not currently Authenticode signed. Microsoft Store signs accepted MSIX packages during publication. Linux release builds run on Ubuntu 22.04 to avoid building against a newer workstation's glibc. Other distributions and all GPUs are not universally certified.
 
-- **📺 Multi-Platform Support** YouTube, Reddit, Twitter (X), Facebook, Instagram, TikTok, SoundCloud and more.
+```bash
+chmod +x VidExtract_*.AppImage
+./VidExtract_*.AppImage
+```
 
-- **📋 Smart Clipboard Monitor** Copy a link and VidExtract detects it automatically.
+## What you can do
 
-- **🎞️ High Quality Downloads** Supports 4K / 8K video and high-quality audio formats (MP3, M4A, FLAC).
+- Download video or audio, choose format/quality, process playlists and manage a queue.
+- Open an existing media file and transcribe locally with multilingual Tiny, Base or Small models.
+- Detect the spoken language automatically and display its full name.
+- Search transcripts and click a timestamp to play that moment.
+- Translate beside the original text, then export TXT, SRT or VTT.
+- Save a selected time range as an MP4 clip.
+- Choose dark/light appearance and one of ten interface languages, including right-to-left Arabic.
 
-- **📂 Playlist Support** Download entire YouTube playlists with a single click.
+**Languages:** Turkish, English, Spanish, French, German, Portuguese, Russian, Arabic, Hindi and Chinese. Interface, source speech language and translation target are independent.
 
-- **🌍 10+ Languages** English, Turkish, German, Spanish, French, Russian, Arabic, Chinese...
+## Local speech recognition and GPU
 
-- **⚙️ Automatic FFmpeg Setup** FFmpeg is downloaded and configured automatically.
+Speech recognition runs through whisper.cpp on your computer. Models are downloaded once when requested: Tiny ~78 MB, Base ~148 MB, Small ~488 MB. CPU/RAM measurements guide the recommendation and thread count. Compatible devices can use **Vulkan GPU acceleration**; CPU mode remains available, and GPU failures retry on CPU. Portable CPU and AVX2 workers are selected according to actual CPU instruction support.
 
-- **🎨 Modern Desktop UI** Built with PySide6. Supports Dark & Light themes.
+Long recordings are processed in bounded audio sections. Automatic transcription and translation can contain mistakes; review important exports.
 
----
+## Two translation choices
 
-## 📥 Download
+**Online:** MyMemory requires no account, API key or model download. Its published anonymous allowance is 5,000 characters/day; a valid optional email can raise that to 50,000. Only the text is sent, with normal network metadata and the email if supplied. [Provider limits](https://mymemory.translated.net/doc/usagelimits.php) may change. Completed segments are cached locally to avoid repeat requests.
 
-### Windows (Recommended)
+**Offline:** download only the required language-direction packs. Each is approximately **65–286 MB**; some pairs require two packs through English. The exact missing download size is shown before installation. A small CTranslate2 CPU worker processes bounded batches; no translation text leaves the computer. Language/model quality varies.
 
-1. Go to **[Releases](https://github.com/idginity124/VidExtract/releases)**
-2. Download the latest **VidExtract.exe**
-3. Double-click and start using
+## Build from source
 
-> Windows SmartScreen may show a warning.  
-> Click **More info → Run anyway**.
+See [BUILDING.md](BUILDING.md) for dependencies, Vulkan SDK and platform commands. Initial preparation needs internet, Node.js 22+, stable Rust, Git, CMake and a C++ compiler.
 
-⭐ If VidExtract helps you, consider starring the repository.
+```bash
+npm ci
+npm run setup:tools
+npm run setup:translation
+npm run licenses
+npm run tauri dev
+```
 
----
+```bash
+npm test
+npm run build
+npm run test:ui                 # first: npx playwright install chromium
+cargo test --manifest-path src-tauri/Cargo.toml --locked
+cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
+```
 
-## 📸 Screenshots
+[GitHub Actions](.github/workflows/desktop.yml) builds Windows and Linux independently, exercises the UI/media code and prepares installers plus a Store MSIX. Tagged releases publish only after both platform jobs pass.
 
-| Service Selection | Download Screen |
-|:--:|:--:|
-| <img src="docs/main_menu.png" width="100%"> | <img src="docs/download_screen.png" width="100%"> |
+## Microsoft Store and privacy
 
-| YouTube Mode | Settings |
-|:--:|:--:|
-| <img src="docs/youtube_input.png" width="100%"> | <img src="docs/settings_advanced.png" width="100%"> |
+Store ID: `9P5V676WV12Z`. Publication is in progress; reserving a name is not the same as having a live listing. See [the Store packaging guide](docs/MICROSOFT-STORE.md) and [listing copy](docs/STORE-LISTING.md).
 
----
+Read [PRIVACY.md](PRIVACY.md) for clipboard behavior, local files, device detection and external services. Download only media you are authorized to access; site availability and permitted use remain subject to the source service and applicable rights.
 
-🧠 **The Training Arc**
+## Open source
 
-This project is part of my ongoing training arc.  
-Built with discipline, refined through mistakes.
-
----
-
-## 🛠️ Developer Setup
-
-Source code is private and not included in this repository.
-This section is kept for internal reference only.
-
+Copyright © 2026 Ekrem Bulgan. VidExtract's original code is **GPL-3.0-only**. Third-party software and models retain their licenses; see [THIRD_PARTY.md](THIRD_PARTY.md). Contributions and reproducible bug reports are welcome through [GitHub Issues](https://github.com/idginity124/VidExtract/issues).

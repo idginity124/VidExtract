@@ -23,3 +23,37 @@ cookies.txt
 
 *.log
 logs/
+
+# Tauri / web frontend
+node_modules/
+.vite/
+src-tauri/target/
+src-tauri/binaries/*.exe
+src-tauri/binaries/*.dll
+src-tauri/binaries/*.zip
+src-tauri/binaries/ffmpeg-*/
+
+# Native tool downloads and generated files
+src-tauri/binaries/*
+!src-tauri/binaries/.gitkeep
+src-tauri/gen/
+*.AppImage
+*.deb
+*.rpm
+
+# UI test artifacts
+test-results/
+
+# Local data and signing material
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.pem
+*.key
+*.msix
+*.msixupload
+*.msixbundle
+store-output/
+release-assets/

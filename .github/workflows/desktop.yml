@@ -1,0 +1,117 @@
+name: Desktop builds
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      store_identity_name:
+        description: 'Partner Center Package/Identity/Name (blank = preview identity)'
+        type: string
+      store_publisher:
+        description: 'Partner Center Package/Identity/Publisher'
+        type: string
+      store_publisher_display_name:
+        description: 'Partner Center PublisherDisplayName'
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: desktop-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  desktop:
+    name: ${{ matrix.os }}
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, windows-2022]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+      - uses: ilammy/msvc-dev-cmd@v1
+        if: runner.os == 'Windows'
+      - name: Linux build and media dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential libssl-dev librsvg2-dev patchelf libayatana-appindicator3-dev libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-pulseaudio xvfb xauth pulseaudio
+      - name: Vulkan build SDK
+        uses: humbletim/install-vulkan-sdk@v1.2
+        with:
+          version: 1.4.341.1
+          cache: true
+      - run: npm ci
+      - run: npm test
+      - name: Browser interactions
+        if: runner.os == 'Linux'
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:ui
+          node scripts/test-stability.mjs
+      - name: Native tools cache
+        id: native-cache
+        uses: actions/cache@v4
+        with:
+          path: src-tauri/binaries
+          key: native-${{ runner.os }}-${{ hashFiles('scripts/setup-tools.mjs', 'scripts/setup-translation.mjs', 'src-tauri/native/**') }}
+      - run: npm run setup:tools
+        if: steps.native-cache.outputs.cache-hit != 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm run setup:translation
+        if: steps.native-cache.outputs.cache-hit != 'true'
+      - run: npm run test:media
+      - run: cargo test --manifest-path src-tauri/Cargo.toml --locked
+      - run: cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets --locked -- -D warnings
+      - run: npm run licenses
+      - name: Windows installer
+        if: runner.os == 'Windows'
+        run: npm run tauri -- build --bundles nsis
+      - name: Microsoft Store MSIX
+        if: runner.os == 'Windows'
+        shell: pwsh
+        env:
+          STORE_IDENTITY_NAME: ${{ inputs.store_identity_name || vars.STORE_IDENTITY_NAME }}
+          STORE_PUBLISHER: ${{ inputs.store_publisher || vars.STORE_PUBLISHER }}
+          STORE_PUBLISHER_DISPLAY_NAME: ${{ inputs.store_publisher_display_name || vars.STORE_PUBLISHER_DISPLAY_NAME }}
+        run: ./scripts/package-msix.ps1
+      - name: Linux AppImage and DEB
+        if: runner.os == 'Linux'
+        run: npm run package:linux
+      - name: Real AppImage video playback
+        if: runner.os == 'Linux'
+        run: |
+          pulseaudio --start --exit-idle-time=-1
+          xvfb-run -a npm run test:playback
+      - name: Stage release files
+        run: node scripts/stage-release.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VidExtract-${{ runner.os }}-x64
+          path: release-assets/*
+          if-no-files-found: error
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: desktop
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+          merge-multiple: true
+      - name: Publish tested packages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" release-assets/* --verify-tag --title "VidExtract $GITHUB_REF_NAME" --notes-file docs/RELEASE-2.3.0.md
