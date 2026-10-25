@@ -35,3 +35,7 @@ Microsoft signs accepted Store MSIX packages. The unsigned submission artifact c
 Disclose that transcription models and offline translation language packs are optional external downloads, online translation sends text to MyMemory and has a free quota, and automated results can contain errors. The Windows UI requires Microsoft Edge WebView2; verify the supported runtime on the certification machine. Do not claim accessibility certification or tested minimum RAM until those have been verified.
 
 References: [Microsoft MSIX preparation](https://learn.microsoft.com/en-us/windows/msix/desktop/desktop-to-uwp-manual-conversion), [Store signing](https://learn.microsoft.com/en-us/windows/apps/publish/get-started), [Tauri distribution](https://v2.tauri.app/distribute/microsoft-store/).
+
+## Local packaging from a Linux cross-build
+
+Stage Windows-only tools in `packaging/windows/binaries` and build the application with cargo-xwin. Set `MAKEMSIX_PATH` to the official Microsoft MSIX SDK `makemsix` executable (built with `USE_VALIDATION_PARSER=ON`), then run `node scripts/package-msix-local.mjs`. It reads the checked-in product identity and writes the unsigned submission package to `store-output`. The native Windows PowerShell packaging script remains available for Windows SDK MakeAppx.
